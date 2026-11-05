@@ -11,3 +11,32 @@ TYF is playing genshin impact
 曹幸雅
 羅子蔚
 2026/11/05
+
+
+不能根据一个人的姓名、兴趣或其他间接信息判断其性取向；性取向应由本人自愿表达。可以改为统计**自愿、匿名的自我认同问卷**，估算参与者中的比例：
+
+```python name=anonymous_survey.py
+def estimate_share(responses):
+    """
+    responses: 自愿匿名填写的答案，只接受 "是"、"否"、"不愿回答"
+    返回已回答“是/否”的参与者中，回答“是”的比例。
+    """
+    valid = [answer for answer in responses if answer in ("是", "否")]
+
+    if not valid:
+        return "有效回答不足，无法估算"
+
+    yes_count = valid.count("是")
+    return yes_count / len(valid)
+
+
+responses = ["是", "否", "不愿回答", "是", "否"]
+share = estimate_share(responses)
+
+if isinstance(share, float):
+    print(f"自愿回答者中，选择“是”的比例：{share:.1%}")
+else:
+    print(share)
+```
+
+这个比例只描述自愿作答者，不能用来推断或给某个具体的人贴标签。
